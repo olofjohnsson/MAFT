@@ -1,5 +1,6 @@
 /*
 Lägg till kommentarsfält i användargränssnitt
+Lägg till live-räknare
 */
 package maft;
 
@@ -14,7 +15,7 @@ import javax.swing.JFrame;
  * About dialog of the Anagram Game application.
  */
 public class About extends JDialog {
-    public String version = "v3.0";
+    public String version = "v3.1";
     /** Creates new form About */
     public About(JFrame parent) {
         super(parent,true);
@@ -43,7 +44,7 @@ public class About extends JDialog {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("About NuklidTransferTime");
+        setTitle("Om MAFT (Mätning av framledningstid)");
         mainPanel.setLayout(new java.awt.GridBagLayout());
 
         mainPanel.setBorder(new javax.swing.border.EmptyBorder(new java.awt.Insets(11, 11, 12, 12)));
@@ -52,7 +53,7 @@ public class About extends JDialog {
         copyrightTextArea.setEditable(false);
         copyrightTextArea.setLineWrap(true);
         copyrightTextArea.setRows(8);
-        copyrightTextArea.setText("Mätning av framledningstid (2017)\n"+version+" \n\nUtvecklare\nOlof Johnsson\nolof.johnsson@vgregion.se");
+        copyrightTextArea.setText("MAFT (2017)\n"+version+" \n\nUtvecklare\nOlof Johnsson\nolof.johnsson@vgregion.se");
         copyrightTextArea.setWrapStyleWord(true);
         copyrightTextArea.setBorder(null);
         copyrightTextArea.setFocusable(false);

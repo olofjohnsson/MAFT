@@ -45,13 +45,13 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+
 /**
  *
  * @author Acer
  */
 public class Maft extends javax.swing.JFrame {
-
-    //writeToFileThread writetofile;
+    counterThread cThread;
     stopWatch stopwatch = new stopWatch();
     private double elapsedTime;
     private Object textarea;
@@ -62,8 +62,8 @@ public class Maft extends javax.swing.JFrame {
     public String comment = "";
     public String row;
     public String formattedTime;
-    public String path = "G:\\\\SU.Omr4.MFT.Radiofarmakacentralen\\\\Utrustning\\\\PETtrace 880\\\\Ledningar\\\\Transfertid\\\\transferTime.xlsx";//default path for file if no other is chosen
-    //public String path = "C:\\Temp\\transferTimeTest.xlsx";//Testfile for debugging
+    public String path = "G:\\\\SU.Omr4.MFT.Radiofarmakacentralen\\\\Utrustning\\\\PETtrace 880\\\\Ledningar\\\\Transfertid\\\\Transfertid.xlsx";//default path for file if no other is chosen
+    //public String path = "C:\\Temp\\MAFT.xlsx";//Testfile for debugging
     public String pathBackup = "C:\\temp\\backup.xlsx";//default path for backup logging
     //String path = "C:\\temp\\output.xlsx";
 
@@ -278,7 +278,7 @@ public class Maft extends javax.swing.JFrame {
         });
 
         buttonGroupDestination.add(jCheckBoxWaste);
-        jCheckBoxWaste.setText("Waste");
+        jCheckBoxWaste.setText("Waste (i valvet)");
         jCheckBoxWaste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxWasteActionPerformed(evt);
@@ -403,7 +403,7 @@ public class Maft extends javax.swing.JFrame {
                             .addComponent(startButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(targetLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -455,13 +455,19 @@ public class Maft extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void startButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startButtonMousePressed
+        textPaneElapsedTime.setText("");
         labelInfo2.setText("");
         stopButton.requestFocus();
+        cThread = new counterThread(textPaneElapsedTime);
+        cThread.start();
         startMeasurement();
     }//GEN-LAST:event_startButtonMousePressed
 
     private void stopButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stopButtonMousePressed
+        textPaneElapsedTime.setText("");
         Thread.currentThread().interrupt();
+        cThread.stop();
+        System.out.println("Kill thread...");
         startButton.requestFocus();
         setElapsedTime();
         updateTextPaneElapsedTime();
@@ -614,9 +620,10 @@ public class Maft extends javax.swing.JFrame {
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, true);
-        textPaneElapsedTime.setText("Graphical counter...");
         stopwatch.start();
         labelInfo.setText("");
+        
+
     }
 
     private void delaySecconds(int s) {
@@ -727,7 +734,7 @@ public class Maft extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuBarFileAbout;
     private javax.swing.JMenuItem menuBarFileItemBrowsefile;
     private javax.swing.JMenuItem menuBarFileOpenLogfile;
-    private javax.swing.JToggleButton startButton;
+    public javax.swing.JToggleButton startButton;
     private javax.swing.JToggleButton stopButton;
     private javax.swing.JLabel targetLabel;
     private javax.swing.JTextPane textPaneElapsedTime;
@@ -735,11 +742,7 @@ public class Maft extends javax.swing.JFrame {
     DecimalFormat numberFormat = new DecimalFormat("#.00");
 
 }
-
-
-
 class writeToFile implements Runnable {
-
     String formattedTime;
     double elapsedTime;
     JLabel labelInfo2 = new JLabel();
