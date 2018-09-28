@@ -124,7 +124,7 @@ public class Maft extends javax.swing.JFrame {
         menuBarFileAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Mätning av framledningstid");
+        setTitle("MAFT (Mätning av framledningstid)");
         setBackground(new java.awt.Color(51, 255, 51));
         setResizable(false);
 
