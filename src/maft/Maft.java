@@ -614,7 +614,7 @@ public class Maft extends javax.swing.JFrame {
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, true);
-        textPaneElapsedTime.setText("Räknar");
+        textPaneElapsedTime.setText("Graphical counter...");
         stopwatch.start();
         labelInfo.setText("");
     }
