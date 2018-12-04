@@ -15,7 +15,7 @@ import javax.swing.JFrame;
  * About dialog of the Anagram Game application.
  */
 public class About extends JDialog {
-    public String version = "v3.1";
+    public String version = "v3.2";
     /** Creates new form About */
     public About(JFrame parent) {
         super(parent,true);
