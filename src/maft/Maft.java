@@ -290,10 +290,10 @@ public class Maft extends javax.swing.JFrame {
         jTextAreaComment.setColumns(20);
         jTextAreaComment.setRows(5);
         jTextAreaComment.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextAreaCommentInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jScrollPane1.setViewportView(jTextAreaComment);
@@ -313,7 +313,7 @@ public class Maft extends javax.swing.JFrame {
 
         menuBarFile.setText("Arkiv");
 
-        menuBarFileItemBrowsefile.setText("Välg logfil");
+        menuBarFileItemBrowsefile.setText("Välj logfil");
         menuBarFileItemBrowsefile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuBarFileItemBrowsefileActionPerformed(evt);
