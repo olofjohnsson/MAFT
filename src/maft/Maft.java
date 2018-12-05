@@ -36,6 +36,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.POIXMLException;
 import static org.apache.poi.hssf.usermodel.HeaderFooter.date;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
@@ -779,7 +780,7 @@ class writeToFile implements Runnable {
     }
     
     
-    public void writeData(String path) {
+    public void writeData(String path){
         try {
             Date date = new Date();
             //row = (target + ";" + date.toString() + ";" + formattedTime + "\n");
@@ -841,6 +842,9 @@ class writeToFile implements Runnable {
                 | InvalidFormatException ex ) {
             ex.printStackTrace();
             writeDataBackup();
+        } catch (POIXMLException e){
+            JOptionPane.showMessageDialog(null, "Nånting verkar vara fel med filen du försöker skriva till. Var god skapa en ny loggfil (*.xlsx) och välj den i menyn");
+            writeDataBackup();
         }
         if (path == "") {
             labelInfo2.setText("<html>Var god välj en logfil<br>(Om det saknas fil, skapa en med formatet *.xlxs)</html>");
@@ -852,13 +856,20 @@ class writeToFile implements Runnable {
     
         public void writeDataBackup() {
         try {
+            
             Date date = new Date();
-            row = (target + ";" + date.toString() + ";" + formattedTime + "\n");
+            if (!new File("C:\\temp", "backup.xlsx").exists()){
+                Workbook workbookblank = new XSSFWorkbook();
+                Sheet sheetblank = workbookblank.createSheet("MAFT");
+                FileOutputStream fileOut = new FileOutputStream(pathBackup);
+                workbookblank.write(fileOut);
+                fileOut.close();
+            }
             FileInputStream inputStream = new FileInputStream(new File(pathBackup));
             Workbook workbook = WorkbookFactory.create(inputStream);
             Sheet sheet = workbook.getSheetAt(0);
             Object[][] bookData = {
-                {target, destination, date.toString(), formattedTime}
+                {target, destination, date.toString(), formattedTime, comment}
             };
 
             int rowCount = sheet.getLastRowNum();
@@ -873,11 +884,14 @@ class writeToFile implements Runnable {
                 cell.setCellValue("Datum/tid");
                 cell = row.createCell(3);
                 cell.setCellValue("Framledningstid (s)");
+                cell = row.createCell(4);
+                cell.setCellValue("Kommentar");
             }
             sheet.setColumnWidth(0, 2048);
-            sheet.setColumnWidth(1, 3072);
+            sheet.setColumnWidth(1, 3000);
             sheet.setColumnWidth(2, 7936);
             sheet.setColumnWidth(3, 4864);
+            sheet.setColumnWidth(4, 16000);
 
             for (Object[] aBook : bookData) {
                 //if(rowCount>0)
@@ -900,17 +914,21 @@ class writeToFile implements Runnable {
                 }
             }
             inputStream.close();
-            FileOutputStream outputStream = new FileOutputStream(path);
+            FileOutputStream outputStream = new FileOutputStream(pathBackup);
             workbook.write(outputStream);
             workbook.close();
             outputStream.close();
 
         } catch (IOException | EncryptedDocumentException
-                | InvalidFormatException ex) {
-            ex.printStackTrace();;
+                | InvalidFormatException ex ) {
+            ex.printStackTrace();
+            writeDataBackup();
+        } catch (POIXMLException e){
+            JOptionPane.showMessageDialog(null, "Nånting verkar vara fel med backupfilen du försöker skriva till. Var god skapa en ny loggfil (*.xlsx) och spara den under C:\\temp\\");
+            writeDataBackup();
         }
-        if (path == "") {
-            labelInfo2.setText("<html>Var god välj logfil<br>(Om det saknas fil, skapa en på formatet *.xlxs)</html>");
+        if (pathBackup == "") {
+            labelInfo2.setText("<html>Var god välj en logfil<br>(Om det saknas fil, skapa en med formatet *.xlxs)</html>");
         } else {
             labelInfo2.setText("<html>Logfil har uppdaterats</html>");
         }
