@@ -63,7 +63,7 @@ public class Maft extends javax.swing.JFrame {
     public String comment = "";
     public String row;
     public String formattedTime;
-    public String path = "G:\\\\SU.Omr4.MFT.Radiofarmakacentralen\\\\Utrustning\\\\PETtrace 880\\\\Ledningar\\\\Transfertid\\\\Transfertiden.xlsx";//default path for file if no other is chosen
+    public String path = "G:\\\\SU.Omr4.MFT.Radiofarmakacentralen\\\\Utrustning\\\\PETtrace 880\\\\Ledningar\\\\Transfertid\\\\Transfertid.xlsx";//default path for file if no other is chosen
     //public String path = "C:\\Temp\\MAFT.xlsx";//Testfile for debugging
     public String pathBackup = "C:\\temp\\backup.xlsx";//default path for backup logging
     //String path = "C:\\temp\\output.xlsx";
