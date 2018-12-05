@@ -63,7 +63,7 @@ public class Maft extends javax.swing.JFrame {
     public String comment = "";
     public String row;
     public String formattedTime;
-    public String path = "G:\\\\SU.Omr4.MFT.Radiofarmakacentralen\\\\Utrustning\\\\PETtrace 880\\\\Ledningar\\\\Transfertid\\\\Transfertid.xlsx";//default path for file if no other is chosen
+    public String path = "G:\\\\SU.Omr4.MFT.Radiofarmakacentralen\\\\Utrustning\\\\PETtrace 880\\\\Ledningar\\\\Transfertid\\\\Transfertiden.xlsx";//default path for file if no other is chosen
     //public String path = "C:\\Temp\\MAFT.xlsx";//Testfile for debugging
     public String pathBackup = "C:\\temp\\backup.xlsx";//default path for backup logging
     //String path = "C:\\temp\\output.xlsx";
@@ -841,6 +841,7 @@ class writeToFile implements Runnable {
         } catch (IOException | EncryptedDocumentException
                 | InvalidFormatException ex ) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Fel vid skrivning till loggfil:\nOrsak:\n"+ex.getMessage());
             writeDataBackup();
         } catch (POIXMLException e){
             JOptionPane.showMessageDialog(null, "Nånting verkar vara fel med filen du försöker skriva till. Var god skapa en ny loggfil (*.xlsx) och välj den i menyn");
@@ -851,7 +852,6 @@ class writeToFile implements Runnable {
         } else {
             labelInfo2.setText("<html>Logfil har uppdaterats</html>");
         }
-
     }
     
         public void writeDataBackup() {
@@ -922,7 +922,7 @@ class writeToFile implements Runnable {
         } catch (IOException | EncryptedDocumentException
                 | InvalidFormatException ex ) {
             ex.printStackTrace();
-            writeDataBackup();
+            JOptionPane.showMessageDialog(null, "Fel vid skrivning till loggfil:\nOrsak:\n"+ex.getMessage());
         } catch (POIXMLException e){
             JOptionPane.showMessageDialog(null, "Nånting verkar vara fel med backupfilen du försöker skriva till. Var god skapa en ny loggfil (*.xlsx) och spara den under C:\\temp\\");
             writeDataBackup();
