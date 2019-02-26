@@ -732,6 +732,7 @@ class writeToFile implements Runnable {
         {   
             //out.write("Target,Destination,Datum/tid,Framledningstid (s),Kommentar\n");
             bw.write(target+","+destination+","+date+","+elapsedTime+"\n");
+            bw.close();
         } 
         catch (IOException e) 
         {
