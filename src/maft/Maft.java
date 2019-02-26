@@ -22,8 +22,11 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +38,7 @@ import javax.swing.JTextPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import static jdk.nashorn.internal.objects.NativeMath.round;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.POIXMLException;
 import static org.apache.poi.hssf.usermodel.HeaderFooter.date;
@@ -63,8 +67,9 @@ public class Maft extends javax.swing.JFrame {
     public String comment = "";
     public String row;
     public String formattedTime;
-    public String path = "G:\\\\SU.Omr4.MFT.Radiofarmakacentralen\\\\Utrustning\\\\PETtrace 880\\\\Ledningar\\\\Transfertid\\\\Transfertid.xlsx";//default path for file if no other is chosen
-    //public String path = "C:\\Temp\\MAFT.xlsx";//Testfile for debugging
+    //public String path = "G:\\\\SU.Omr4.MFT.Radiofarmakacentralen\\\\Utrustning\\\\PETtrace 880\\\\Ledningar\\\\Transfertid\\\\Transfertid.xlsx";//default path for file if no other is chosen
+    public String path = "G:\\\\SU.Omr4.MFT.Radiofarmakacentralen\\\\Utrustning\\\\PETtrace 880\\\\Ledningar\\\\Transfertid\\\\Transfertid.csv";//default path for file if no other is chosen
+    //public String path = "C:\\temp\\MAFT.csv";//Testfile for debugging
     public String pathBackup = "C:\\temp\\backup.xlsx";//default path for backup logging
     //String path = "C:\\temp\\output.xlsx";
 
@@ -113,11 +118,6 @@ public class Maft extends javax.swing.JFrame {
         jCheckBoxDestNa = new javax.swing.JCheckBox();
         jCheckBoxWaste = new javax.swing.JCheckBox();
         labelInfo2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaComment = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         menuBarFile = new javax.swing.JMenu();
         menuBarFileItemBrowsefile = new javax.swing.JMenuItem();
@@ -288,30 +288,6 @@ public class Maft extends javax.swing.JFrame {
 
         labelInfo2.setToolTipText("");
 
-        jTextAreaComment.setColumns(20);
-        jTextAreaComment.setRows(5);
-        jTextAreaComment.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jTextAreaCommentInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-        });
-        jScrollPane1.setViewportView(jTextAreaComment);
-
-        jButton1.setText("Spara kommentar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Kommentar");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel2.setText("Läggs till i logfil på senaste sparade mätningen");
-
         menuBarFile.setText("Arkiv");
 
         menuBarFileItemBrowsefile.setText("Välj logfil");
@@ -358,39 +334,32 @@ public class Maft extends javax.swing.JFrame {
                         .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addComponent(targetLabel)
+                            .addComponent(jCheckBoxT1)
+                            .addComponent(jCheckBoxT2)
+                            .addComponent(jCheckBoxT4)
+                            .addComponent(jCheckBoxTargetNa))
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(destinationLabel)
+                            .addComponent(jCheckBoxDestNa)
+                            .addComponent(jCheckBoxWaste)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(targetLabel)
-                                    .addComponent(jCheckBoxT1)
-                                    .addComponent(jCheckBoxT2)
-                                    .addComponent(jCheckBoxT4)
-                                    .addComponent(jCheckBoxTargetNa))
-                                .addGap(64, 64, 64)
+                                    .addComponent(jCheckBoxTalia)
+                                    .addComponent(jCheckBoxBBS1)
+                                    .addComponent(jCheckBoxMIP1))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(destinationLabel)
-                                    .addComponent(jCheckBoxDestNa)
-                                    .addComponent(jCheckBoxWaste)
+                                    .addComponent(jCheckBoxBBS2)
+                                    .addComponent(jCheckBoxManuela)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBoxTalia)
-                                            .addComponent(jCheckBoxBBS1)
-                                            .addComponent(jCheckBoxMIP1))
+                                        .addComponent(jCheckBoxMIP2)
                                         .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBoxBBS2)
-                                            .addComponent(jCheckBoxManuela)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jCheckBoxMIP2)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jCheckBoxMIP3))))))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                                        .addComponent(jCheckBoxMIP3)))))
                         .addContainerGap(19, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelInfo2, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(labelInfo2, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -405,7 +374,7 @@ public class Maft extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(targetLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(destinationLabel))
@@ -438,17 +407,9 @@ public class Maft extends javax.swing.JFrame {
                         .addComponent(jCheckBoxT2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBoxTargetNa)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelInfo2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addGap(2, 2, 2)
-                .addComponent(jLabel2)
-                .addGap(2, 2, 2)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(20, 20, 20))
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -472,8 +433,8 @@ public class Maft extends javax.swing.JFrame {
         startButton.requestFocus();
         setElapsedTime();
         updateTextPaneElapsedTime();
-        comment = jTextAreaComment.getText();
-        jTextAreaComment.setText("");
+        //comment = jTextAreaComment.getText();
+        //jTextAreaComment.setText("");
         writeToFile w = null;
         try {
             w = new writeToFile(path, elapsedTime, formattedTime, labelInfo2, textPaneElapsedTime, target, destination, comment);
@@ -580,8 +541,8 @@ public class Maft extends javax.swing.JFrame {
         startButton.requestFocus();
         setElapsedTime();
         updateTextPaneElapsedTime();
-        comment = jTextAreaComment.getText();
-        jTextAreaComment.setText("");
+        //comment = jTextAreaComment.getText();
+        //jTextAreaComment.setText("");
         writeToFile w = null;
         try {
             w = new writeToFile(path, elapsedTime, formattedTime, labelInfo2, textPaneElapsedTime, target, destination, comment);
@@ -596,16 +557,6 @@ public class Maft extends javax.swing.JFrame {
         destination = "N/A";
         startButton.requestFocus();
     }//GEN-LAST:event_jCheckBoxDestNaActionPerformed
-
-    private void jTextAreaCommentInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextAreaCommentInputMethodTextChanged
-        System.out.println("textarea changed...");
-        comment = jTextAreaComment.getText();
-    }//GEN-LAST:event_jTextAreaCommentInputMethodTextChanged
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        writeComment();
-        jTextAreaComment.setText("");
-    }//GEN-LAST:event_jButton1MouseClicked
     private void setElapsedTime() {
         elapsedTime = stopwatch.elapsedTime();
     }
@@ -635,7 +586,7 @@ public class Maft extends javax.swing.JFrame {
         }
     }
     
-    
+    /*
     private void writeComment(){
         try {
             FileInputStream inputStream = new FileInputStream(new File(path));
@@ -664,7 +615,7 @@ public class Maft extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-
+    */
     /**
      * @param args the command line arguments
      */
@@ -708,7 +659,6 @@ public class Maft extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupStartStop;
     private javax.swing.JLabel destinationLabel;
     private javax.swing.JFileChooser fileBrowser;
-    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBoxBBS1;
     private javax.swing.JCheckBox jCheckBoxBBS2;
     private javax.swing.JCheckBox jCheckBoxDestNa;
@@ -722,11 +672,7 @@ public class Maft extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxTalia;
     private javax.swing.JCheckBox jCheckBoxTargetNa;
     private javax.swing.JCheckBox jCheckBoxWaste;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextAreaComment;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelInfo;
     private javax.swing.JLabel labelInfo2;
@@ -741,6 +687,7 @@ public class Maft extends javax.swing.JFrame {
     private javax.swing.JTextPane textPaneElapsedTime;
     // End of variables declaration//GEN-END:variables
     DecimalFormat numberFormat = new DecimalFormat("#.00");
+
 
 }
 class writeToFile implements Runnable {
@@ -778,8 +725,22 @@ class writeToFile implements Runnable {
             textPaneElapsedTime.setText("");
         }
     }
+    public void writeData(String path){
+        Date date = new Date();
+        File logFile = new File(path);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(logFile, true))) 
+        {   
+            //out.write("Target,Destination,Datum/tid,Framledningstid (s),Kommentar\n");
+            bw.write(target+","+destination+","+date+","+elapsedTime+"\n");
+            bw.close();
+        } 
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+    }
     
-    
+    /*
     public void writeData(String path){
         try {
             Date date = new Date();
@@ -853,8 +814,9 @@ class writeToFile implements Runnable {
             labelInfo2.setText("<html>Logfil har uppdaterats</html>");
         }
     }
-    
-        public void writeDataBackup() {
+    */
+    /*    
+    public void writeDataBackup() {
         try {
             
             Date date = new Date();
@@ -933,6 +895,6 @@ class writeToFile implements Runnable {
             labelInfo2.setText("<html>Logfil har uppdaterats</html>");
         }
 
-    }
+    }*/
     
 }
