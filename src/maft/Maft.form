@@ -93,49 +93,39 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Component id="targetLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxT1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxT2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxT4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxTargetNa" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="destinationLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxDestNa" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxWaste" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="targetLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCheckBoxT1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCheckBoxT2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCheckBoxT4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCheckBoxTargetNa" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxTalia" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxBBS1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxMIP1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="destinationLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCheckBoxDestNa" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCheckBoxWaste" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxBBS2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxManuela" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jCheckBoxTalia" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jCheckBoxBBS1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jCheckBoxMIP1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jCheckBoxMIP2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jCheckBoxBBS2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jCheckBoxManuela" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jCheckBoxMIP2" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jCheckBoxMIP3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="jCheckBoxMIP3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="19" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labelInfo2" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" pref="293" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="labelInfo2" min="-2" pref="334" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -158,7 +148,7 @@
                       <Component id="jScrollPane2" min="-2" pref="26" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="targetLabel" max="32767" attributes="0"/>
                   <Component id="destinationLabel" min="-2" max="-2" attributes="0"/>
@@ -201,17 +191,9 @@
                       <Component id="jCheckBoxTargetNa" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="3" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="labelInfo2" min="-2" pref="25" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="126" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -451,48 +433,6 @@
     <Component class="javax.swing.JLabel" name="labelInfo2">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-      </Properties>
-    </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextAreaComment">
-          <Properties>
-            <Property name="columns" type="int" value="20"/>
-            <Property name="rows" type="int" value="5"/>
-          </Properties>
-          <Events>
-            <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jTextAreaCommentInputMethodTextChanged"/>
-          </Events>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Spara kommentar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Kommentar"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="10" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="L&#xe4;ggs till i logfil p&#xe5; senaste sparade m&#xe4;tningen"/>
       </Properties>
     </Component>
   </SubComponents>
