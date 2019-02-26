@@ -2,6 +2,8 @@
 Lägg till kommentarsfält i användargränssnitt
 Lägg till live-räknare
 3.3: Backup funktionalitet samt Exception hantering för POI
+4.0: Skriv till textfil istället för excel-fil. Ta bort möjlighet att skriva 
+kommentar
 */
 package maft;
 
@@ -16,7 +18,7 @@ import javax.swing.JFrame;
  * About dialog of the Anagram Game application.
  */
 public class About extends JDialog {
-    public String version = "v3.3";
+    public String version = "v4.0";
     /** Creates new form About */
     public About(JFrame parent) {
         super(parent,true);
